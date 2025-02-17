@@ -30,7 +30,7 @@ def get_year_word(n):
 
 year_word = get_year_word(delta)
 
-products_dict = defaultdict(list)
+new_products = defaultdict(list)
 
 for product in products:
     category = product["Категория"]
@@ -42,8 +42,8 @@ for product in products:
         "Цена": product["Цена"],
         "Акция": product["Акция"] if pd.notna(product["Акция"]) else ""
     }
-    products_dict[category].append(wine)
-    sorted_dct = OrderedDict(sorted(products_dict.items()))
+    new_products[category].append(wine)
+    sorted = OrderedDict(sorted(new_products.items()))
 
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -55,7 +55,7 @@ template = env.get_template('template.html')
 rendered_page = template.render(
     cap_title=f"Уже {delta} {year_word} с вами",
     products=products,
-    sorted_dct=sorted_dct
+    sorted=sorted
 )
 
 with open('index.html', 'w', encoding="utf8") as file:
