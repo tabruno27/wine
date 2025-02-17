@@ -43,8 +43,7 @@ for product in products:
         "Акция": product["Акция"] if pd.notna(product["Акция"]) else ""
     }
     new_products[category].append(wine)
-    sorted = OrderedDict(sorted(new_products.items()))
-
+    
 env = Environment(
     loader=FileSystemLoader('.'),
     autoescape=select_autoescape(['html', 'xml'])
@@ -55,7 +54,6 @@ template = env.get_template('template.html')
 rendered_page = template.render(
     cap_title=f"Уже {delta} {year_word} с вами",
     products=products,
-    sorted=sorted
 )
 
 with open('index.html', 'w', encoding="utf8") as file:
