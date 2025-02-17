@@ -8,7 +8,12 @@ from collections import defaultdict, OrderedDict
 CREAT_YEAR = 1920
 delta = datetime.now().year - CREAT_YEAR
 
-excel_data_df = pd.read_excel('wine3.xlsx', sheet_name='Лист1',  na_values=['N/A', 'NA'], keep_default_na=False)
+parser = argparse.ArgumentParser(description='Обработка данных из Excel.')
+parser.add_argument('--data_path', type=str, default='Production.xlsx', help='Путь к файлу с данными')
+
+args = parser.parse_args()
+
+excel_data_df = pd.read_excel(args.data_path, sheet_name='Лист1', na_values=['N/A', 'NA'], keep_default_na=False)
 products = excel_data_df.to_dict(orient='records')
 
 
