@@ -124,7 +124,6 @@
               <img src="images/{{ product['Картинка']}}" alt="Image" class="img-fluid">
                 {%if product['Акция']: %}
               <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
-                {%else %}
                 {% endif %}
               <div>
                 <h3 class="heading mt-3 mb-3 text-dark">{{product['Название']}}</h3>
@@ -133,7 +132,6 @@
                   Сорт винограда - {{ product['Сорт'] }} <br/>
                   <span class="price">{{product['Цена']}} р.</span>
                 <p>
-                  {% else %}
                 <p>
                   <span class="price">{{product['Цена']}} р.</span>
                 </p>
