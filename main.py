@@ -4,6 +4,10 @@ from datetime import datetime
 import pandas as pd
 from collections import defaultdict, OrderedDict
 
+
+CREAT_YEAR = 1920
+
+
 def get_year_word(n):
     if 11 <= n % 100 <= 14:
         return "лет"
@@ -16,7 +20,6 @@ def get_year_word(n):
 
 
 def main():
-    CREAT_YEAR = 1920
     delta = datetime.now().year - CREAT_YEAR
     
     parser = argparse.ArgumentParser(description='Обработка данных из Excel.')
