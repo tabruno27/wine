@@ -28,13 +28,13 @@ def main():
     args = parser.parse_args()
 
     excel_data_df = pd.read_excel(args.data_path, sheet_name='Лист1', na_values=['N/A', 'NA'], keep_default_na=False)
-    products = excel_data_df.to_dict(orient='records')
+    productions = excel_data_df.to_dict(orient='records')
 
     year_word = get_year_word(delta)
 
-    new_products = defaultdict(list)
+    products = defaultdict(list)
 
-    for product in products:
+    for product in productions:
         category = product["Категория"]
         wine = {
             "Картинка": product["Картинка"],
@@ -44,7 +44,7 @@ def main():
             "Цена": product["Цена"],
             "Акция": product["Акция"] if pd.notna(product["Акция"]) else ""
         }
-        new_products[category].append(wine)
+        products[category].append(wine)
     
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -55,7 +55,7 @@ def main():
     
     rendered_page = template.render(
         cap_title=f"Уже {delta} {year_word} с вами",
-        new_products=new_products,
+        products=products,
     )
     
     with open('index.html', 'w', encoding="utf8") as file:
